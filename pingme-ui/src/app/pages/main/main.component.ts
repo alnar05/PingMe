@@ -1,5 +1,5 @@
 import {AfterViewChecked, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {ChatListComponent} from '../../component/chat-list/chat-list.component';
+import {ChatListComponent} from '../../components/chat-list/chat-list.component';
 import {KeycloakService} from '../../utils/keycloak/keycloak.service';
 import {ChatResponse} from '../../services/models/chat-response';
 import {DatePipe} from '@angular/common';
@@ -200,7 +200,7 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewChecked {
 
             },
             () => console.error('Error while connecting to webSocket')
-          );
+            );
         }
       );
     }

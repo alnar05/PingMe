@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { KeycloakService } from './keycloak.service';
 
-describe('Keycloak', () => {
+describe('KeycloakService', () => {
   let service: KeycloakService;
 
   beforeEach(() => {

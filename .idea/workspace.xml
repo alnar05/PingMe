@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7ef964cd-6185-4a61-9201-1bb2821b355e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/pingme.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pingme.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/PingMeApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/chat/Chat.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/chat/ChatConstants.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/chat/ChatController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/chat/ChatMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/chat/ChatRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/chat/ChatResponse$Builder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/chat/ChatResponse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/chat/ChatService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/common/BaseAuditingEntity$Builder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/common/BaseAuditingEntity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/common/StringResponse$Builder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/common/StringResponse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/file/FileService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/file/FileUtils.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/interceptor/UserSynchronizerFilter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/message/Message.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/message/MessageConstants.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/message/MessageController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/message/MessageMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/message/MessageRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/message/MessageRequest$Builder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/message/MessageRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/message/MessageResponse$Builder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/message/MessageResponse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/message/MessageService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/message/MessageState.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/message/MessageType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/notification/Notification$Builder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/notification/Notification.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/notification/NotificationService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/notification/NotificationType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/security/KeycloakJwtAuthenticationConverter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/security/SecurityConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/security/WebConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/user/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/user/UserConstants.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/user/UserController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/user/UserMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/user/UserRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/user/UserResponse$Builder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/user/UserResponse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/user/UserService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/user/UserSynchronizer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-backend/target/classes/com/example/PingMe/ws/WebSocketConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-ui/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/pingme-ui/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-ui/.vscode/tasks.json" beforeDir="false" afterPath="$PROJECT_DIR$/pingme-ui/.vscode/tasks.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-ui/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/pingme-ui/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-ui/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/pingme-ui/angular.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-ui/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/pingme-ui/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-ui/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/pingme-ui/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-ui/src/app/app.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pingme-ui/src/app/app.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-ui/src/app/app.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-ui/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pingme-ui/src/app/app.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-ui/src/app/app.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-ui/src/app/app.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-ui/src/app/app.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-ui/src/app/component/chat-list/chat-list.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-ui/src/app/component/chat-list/chat-list.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-ui/src/app/component/chat-list/chat-list.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-ui/src/app/component/chat-list/chat-list.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-ui/src/app/pages/main/main.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/pingme-ui/src/app/pages/main/main.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-ui/src/app/pages/main/main.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pingme-ui/src/app/pages/main/main.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-ui/src/app/pages/main/main.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pingme-ui/src/app/pages/main/main.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-ui/src/app/services/models/message-request.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pingme-ui/src/app/services/models/message-request.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-ui/src/app/services/models/message-response.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pingme-ui/src/app/services/models/message-response.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-ui/src/app/utils/http/keycloak-http-interceptor.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-ui/src/app/utils/http/keycloak-http-interceptor.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-ui/src/app/utils/keycloak/keycloak.service.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pingme-ui/src/app/utils/keycloak/keycloak.service.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-ui/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/pingme-ui/src/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-ui/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pingme-ui/src/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-ui/src/openapi/openapi.json" beforeDir="false" afterPath="$PROJECT_DIR$/pingme-ui/src/openapi/openapi.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-ui/tsconfig.app.json" beforeDir="false" afterPath="$PROJECT_DIR$/pingme-ui/tsconfig.app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-ui/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/pingme-ui/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pingme-ui/tsconfig.spec.json" beforeDir="false" afterPath="$PROJECT_DIR$/pingme-ui/tsconfig.spec.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 2
+}]]></component>
+  <component name="ProjectId" id="37HdrklGKnJ6W3e5fLg1i60BUnH" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.PingMeApplication.executor": "Run",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "C:\\Users\\Narek\\Desktop\\PingMe\\pingme-ui\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ]
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="PingMeApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="PingMe" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.PingMe.PingMeApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.22562.218" />
+        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-IU-243.22562.218" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7ef964cd-6185-4a61-9201-1bb2821b355e" name="Changes" comment="" />
+      <created>1766564143521</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1766564143521</updated>
+      <workItem from="1766564158223" duration="2546000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

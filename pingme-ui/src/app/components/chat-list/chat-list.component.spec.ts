@@ -1,4 +1,3 @@
-
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ChatListComponent } from './chat-list.component';
@@ -11,7 +10,7 @@ describe('ChatListComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ChatListComponent]
     })
-      .compileComponents();
+    .compileComponents();
 
     fixture = TestBed.createComponent(ChatListComponent);
     component = fixture.componentInstance;

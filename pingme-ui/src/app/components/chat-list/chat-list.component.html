@@ -27,7 +27,7 @@
   @if (chats().length && !searchNewContact) {
     @for (chat of chats(); track chat) {
       <div class="d-flex align-items-center justify-content-between border-bottom-gray p-2"
-           (click)="chatClicked(chat)"
+      (click)="chatClicked(chat)"
       >
         <div class="d-flex gap-2">
           <div class="user-img">

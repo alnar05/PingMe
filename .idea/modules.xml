@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/pingme-backend/PingMe.iml" filepath="$PROJECT_DIR$/pingme-backend/PingMe.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/pingme.iml" filepath="$PROJECT_DIR$/.idea/pingme.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/PingMe.iml" filepath="$PROJECT_DIR$/.idea/PingMe.iml" />
     </modules>
   </component>
 </project>
