@@ -68,6 +68,12 @@
   padding: 0.3rem 0.62rem;
   background: var(--accent-soft);
   color: var(--accent);
+  border: 1px solid transparent;
+
+  &.active {
+    background: var(--accent);
+    color: #fff;
+  }
 }
 
 .chat-list-body {

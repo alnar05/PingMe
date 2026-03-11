@@ -55,8 +55,14 @@
                     <div class="message-card">
                       @if (message.type === 'TEXT') {
                         <span>{{ message.content }}</span>
-                      } @else if (message.media) {
-                        <img width="220" class="cursor-pointer" [src]="'data:image/jpg;base64,' + message.media" alt="Sent media">
+                      } @else if (message.type === 'IMAGE' && message.media?.[0]) {
+                        <img width="220" class="cursor-pointer" [src]="getImageSource(message)" alt="Sent media" (click)="openImagePreview(getImageMedia(message))">
+                      } @else if (isFileMessage(message)) {
+                        <button class="file-link" (click)="downloadFile(message)">
+                          <i class="fas fa-file-arrow-down"></i>
+                          <span>{{ getFileInfo(message).fileName }}</span>
+                          <small>{{ getFileSizeLabel(getFileInfo(message).fileSize) }}</small>
+                        </button>
                       }
                       <small class="meta">
                         {{ message.createdAt | date:'HH:mm' }}
@@ -76,8 +82,14 @@
                     <div class="message-card">
                       @if (message.type === 'TEXT') {
                         <span>{{ message.content }}</span>
-                      } @else if (message.media) {
-                        <img width="220" class="cursor-pointer" [src]="'data:image/jpg;base64,' + message.media" alt="Received media">
+                      } @else if (message.type === 'IMAGE' && message.media?.[0]) {
+                        <img width="220" class="cursor-pointer" [src]="getImageSource(message)" alt="Received media" (click)="openImagePreview(getImageMedia(message))">
+                      } @else if (isFileMessage(message)) {
+                        <button class="file-link" (click)="downloadFile(message)">
+                          <i class="fas fa-file-arrow-down"></i>
+                          <span>{{ getFileInfo(message).fileName }}</span>
+                          <small>{{ getFileSizeLabel(getFileInfo(message).fileSize) }}</small>
+                        </button>
                       }
                       <small class="meta">{{ message.createdAt | date:'HH:mm' }}</small>
                     </div>
@@ -93,7 +105,7 @@
                   #inputFile
                   type="file"
                   [hidden]="true"
-                  accept=".jpg, .jpeg,.png,.svg,.mp4,.mov,.mp3"
+
                   (change)="uploadMedia($event.target)"
                 >
 
@@ -126,6 +138,16 @@
               </div>
             </div>
           </div>
+
+            @if (selectedImage) {
+              <div class="image-preview-overlay" tabindex="0" >
+                <button class="close-preview-btn" (click)="closeImagePreview()">
+                  <i class="fas fa-times"></i>
+                </button>
+                <img class="preview-image" [src]="'data:image/jpg;base64,' + selectedImage" alt="Image preview">
+              </div>
+            }
+
         } @else {
           <div class="empty-state">
             <img width="240" src="logo.png" alt="PingMe logo">

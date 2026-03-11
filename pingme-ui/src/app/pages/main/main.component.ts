@@ -1,4 +1,4 @@
-import {AfterViewChecked, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewChecked, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ChatListComponent} from '../../components/chat-list/chat-list.component';
 import {KeycloakService} from '../../utils/keycloak/keycloak.service';
 import {ChatResponse} from '../../services/models/chat-response';
@@ -33,6 +33,8 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewChecked {
   socketClient: any = null;
   messageContent: string = '';
   showEmojis = false;
+  readonly maxUploadSizeInBytes = 100 * 1024 * 1024;
+  selectedImage: string | null = null;
   @ViewChild('scrollableDiv') scrollableDiv!: ElementRef<HTMLDivElement>;
   private notificationSubscription: any;
 
@@ -118,36 +120,48 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   uploadMedia(target: EventTarget | null) {
     const file = this.extractFileFromTarget(target);
-    if (file !== null) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        if (reader.result) {
-
-          const mediaLines = reader.result.toString().split(',')[1];
-
-          this.messageService.uploadMedia({
-            'chat-id': this.selectedChat.id as string,
-            body: {
-              file: file
-            }
-          }).subscribe({
-            next: () => {
-              const message: MessageResponse = {
-                senderId: this.getSenderId(),
-                receiverId: this.getReceiverId(),
-                content: 'Attachment',
-                type: 'IMAGE',
-                state: 'SENT',
-                media: [mediaLines],
-                createdAt: new Date().toString()
-              };
-              this.chatMessages.push(message);
-            }
-          });
-        }
-      }
-      reader.readAsDataURL(file);
+    if (file === null) {
+      return;
     }
+
+    if (file.size > this.maxUploadSizeInBytes) {
+      window.alert('Maximum upload size is 100 MB.');
+      return;
+    }
+
+    const isImage = file.type.startsWith('image/');
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (!reader.result) {
+        return;
+      }
+
+      const mediaLines = reader.result.toString().split(',')[1];
+      this.messageService.uploadMedia({
+        'chat-id': this.selectedChat.id as string,
+        body: {
+          file: file
+        }
+      }).subscribe({
+        next: () => {
+          const message: MessageResponse = {
+            senderId: this.getSenderId(),
+            receiverId: this.getReceiverId(),
+            content: isImage
+              ? 'Attachment'
+              : JSON.stringify({ fileName: file.name, fileSize: file.size }),
+            type: isImage ? 'IMAGE' : 'FILE',
+            state: 'SENT',
+            media: [mediaLines],
+            createdAt: new Date().toString()
+          };
+          this.selectedChat.lastMessage = 'Attachment';
+          this.chatMessages.push(message);
+          this.resetFileInput(target);
+        }
+      });
+    };
+    reader.readAsDataURL(file);
   }
 
   logout() {
@@ -212,6 +226,7 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewChecked {
       switch (notification.type) {
         case 'MESSAGE':
         case 'IMAGE':
+        case 'FILE':
           const message: MessageResponse = {
             senderId: notification.senderId,
             receiverId: notification.receiverId,
@@ -220,7 +235,7 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewChecked {
             media: notification.media,
             createdAt: new Date().toString()
           };
-          if (notification.type === 'IMAGE') {
+          if (notification.type === 'IMAGE' || notification.type === 'FILE') {
             this.selectedChat.lastMessage = 'Attachment';
           } else {
             this.selectedChat.lastMessage = notification.content;
@@ -236,7 +251,7 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewChecked {
       if (destChat && notification.type !== 'SEEN') {
         if (notification.type === 'MESSAGE') {
           destChat.lastMessage = notification.content;
-        } else if (notification.type === 'IMAGE') {
+        } else if (notification.type === 'IMAGE' || notification.type === 'FILE') {
           destChat.lastMessage = 'Attachment';
         }
         destChat.lastMessageTime = new Date().toString();
@@ -270,6 +285,74 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewChecked {
     return this.selectedChat.senderId as string;
   }
 
+
+
+  openImagePreview(imageBase64: string) {
+    this.selectedImage = imageBase64;
+  }
+
+  closeImagePreview() {
+    this.selectedImage = null;
+  }
+
+
+  @HostListener('document:keydown.escape')
+  onEscapeKeyPressed() {
+    this.closeImagePreview();
+  }
+
+
+  getImageSource(message: MessageResponse): string {
+    return `data:image/jpg;base64,${message.media?.[0] ?? ''}`;
+  }
+
+  getImageMedia(message: MessageResponse): string {
+    return message.media?.[0] ?? '';
+  }
+
+  isFileMessage(message: MessageResponse): boolean {
+    return message.type === 'FILE';
+  }
+
+  getFileInfo(message: MessageResponse): { fileName: string; fileSize: number } {
+    if (!message.content) {
+      return { fileName: 'file', fileSize: 0 };
+    }
+
+    try {
+      const parsedContent = JSON.parse(message.content) as { fileName?: string; fileSize?: number };
+      return {
+        fileName: parsedContent.fileName ?? 'file',
+        fileSize: parsedContent.fileSize ?? 0
+      };
+    } catch {
+      return { fileName: message.content, fileSize: 0 };
+    }
+  }
+
+  getFileSizeLabel(sizeInBytes: number): string {
+    if (sizeInBytes === 0) {
+      return '0 B';
+    }
+    const units = ['B', 'KB', 'MB', 'GB'];
+    const unitIndex = Math.min(Math.floor(Math.log(sizeInBytes) / Math.log(1024)), units.length - 1);
+    const normalizedSize = sizeInBytes / Math.pow(1024, unitIndex);
+    return `${normalizedSize.toFixed(unitIndex === 0 ? 0 : 1)} ${units[unitIndex]}`;
+  }
+
+  downloadFile(message: MessageResponse) {
+    const base64Value = message.media?.[0];
+    if (!base64Value) {
+      return;
+    }
+
+    const fileInfo = this.getFileInfo(message);
+    const anchor = document.createElement('a');
+    anchor.href = `data:application/octet-stream;base64,${base64Value}`;
+    anchor.download = fileInfo.fileName;
+    anchor.click();
+  }
+
   private scrollToBottom() {
     if (this.scrollableDiv) {
       const div = this.scrollableDiv.nativeElement;
@@ -283,5 +366,12 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewChecked {
       return null;
     }
     return htmlInputTarget.files[0];
+  }
+
+  private resetFileInput(target: EventTarget | null) {
+    const htmlInputTarget = target as HTMLInputElement;
+    if (htmlInputTarget) {
+      htmlInputTarget.value = '';
+    }
   }
 }
