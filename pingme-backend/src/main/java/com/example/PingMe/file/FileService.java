@@ -60,6 +60,21 @@ public class FileService {
         return null;
     }
 
+
+
+    public String resolvePublicMediaUrl(String filePath) {
+        if (filePath == null || filePath.isBlank()) {
+            return null;
+        }
+        final String normalizedRoot = Paths.get(fileUploadPath).toAbsolutePath().normalize().toString();
+        final String normalizedFilePath = Paths.get(filePath).toAbsolutePath().normalize().toString();
+        if (!normalizedFilePath.startsWith(normalizedRoot)) {
+            return null;
+        }
+        final String relativePath = normalizedFilePath.substring(normalizedRoot.length()).replace("\\", "/");
+        return "/uploads" + (relativePath.startsWith("/") ? relativePath : "/" + relativePath);
+    }
+
     private String getFileExtension(String fileName) {
         if (fileName == null || fileName.isEmpty()) {
             return "";

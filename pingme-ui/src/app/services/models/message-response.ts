@@ -7,6 +7,7 @@ export interface MessageResponse {
   createdAt?: string;
   id?: number;
   media?: Array<string>;
+  mediaUrl?: string;
   receiverId?: string;
   senderId?: string;
   state?: 'SENT' | 'SEEN';

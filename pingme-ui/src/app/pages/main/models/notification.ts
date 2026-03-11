@@ -7,4 +7,5 @@ export interface Notification {
   type?: 'SEEN' | 'MESSAGE' | 'IMAGE' | 'VIDEO' | 'AUDIO' | 'FILE';
   chatName?: string;
   media?: Array<string>;
+  mediaUrl?: string;
 }

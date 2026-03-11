@@ -8,8 +8,10 @@ import com.example.PingMe.notification.Notification;
 import com.example.PingMe.notification.NotificationService;
 import com.example.PingMe.notification.NotificationType;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -91,34 +93,36 @@ public class MessageService {
         final String senderId = getSenderId(chat, authentication);
         final String receiverId = getRecipientId(chat, authentication);
 
+        final boolean imageFile = file.getContentType() != null && file.getContentType().startsWith("image/");
+        if (!imageFile) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Only image files are supported.");
+        }
+
         final String filePath = fileService.saveFile(file, senderId);
+        final String mediaUrl = fileService.resolvePublicMediaUrl(filePath);
+
         Message message = new Message();
         message.setReceiverId(receiverId);
         message.setSenderId(senderId);
         message.setState(MessageState.SENT);
-        final boolean imageFile = file.getContentType() != null && file.getContentType().startsWith("image/");
-
-        message.setType(imageFile ? MessageType.IMAGE : MessageType.FILE);
-        message.setContent(imageFile ? "Attachment" : buildFileContent(file));
+        message.setType(MessageType.IMAGE);
+        message.setContent("Image");
         message.setMediaFilePath(filePath);
         message.setChat(chat);
         messageRepository.save(message);
 
         Notification notification = Notification.builder()
                 .chatId(chat.getId())
-                .type(imageFile ? NotificationType.IMAGE : NotificationType.FILE)
+                .type(NotificationType.IMAGE)
                 .content(message.getContent())
                 .senderId(senderId)
                 .receiverId(receiverId)
-                .messageType(imageFile ? MessageType.IMAGE : MessageType.FILE)
+                .messageType(MessageType.IMAGE)
                 .media(FileUtils.readFileFromLocation(filePath))
+                .mediaUrl(mediaUrl)
                 .build();
 
         notificationService.sendNotification(receiverId, notification);
-    }
-
-    private String buildFileContent(MultipartFile file) {
-        return "{\"fileName\":\"" + file.getOriginalFilename() + "\",\"fileSize\":" + file.getSize() + "}";
     }
 
     private String getSenderId(Chat chat, Authentication authentication) {

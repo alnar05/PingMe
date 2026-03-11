@@ -50,51 +50,7 @@
 
             <div #scrollableDiv class="messages-area">
               @for (message of chatMessages; track message) {
-                @if (isSelfMessage(message)) {
-                  <div class="message-row self">
-                    <div class="message-card">
-                      @if (message.type === 'TEXT') {
-                        <span>{{ message.content }}</span>
-                      } @else if (message.type === 'IMAGE' && message.media?.[0]) {
-                        <img width="220" class="cursor-pointer" [src]="getImageSource(message)" alt="Sent media" (click)="openImagePreview(getImageMedia(message))">
-                      } @else if (isFileMessage(message)) {
-                        <button class="file-link" (click)="downloadFile(message)">
-                          <i class="fas fa-file-arrow-down"></i>
-                          <span>{{ getFileInfo(message).fileName }}</span>
-                          <small>{{ getFileSizeLabel(getFileInfo(message).fileSize) }}</small>
-                        </button>
-                      }
-                      <small class="meta">
-                        {{ message.createdAt | date:'HH:mm' }}
-                        @if (message.state === 'SENT') {
-                          <i class="fas fa-check seen"></i>
-                        } @else {
-                          <span class="double-check">
-                            <i class="fas fa-check seen"></i>
-                            <i class="fas fa-check seen ml-neg"></i>
-                          </span>
-                        }
-                      </small>
-                    </div>
-                  </div>
-                } @else {
-                  <div class="message-row friend">
-                    <div class="message-card">
-                      @if (message.type === 'TEXT') {
-                        <span>{{ message.content }}</span>
-                      } @else if (message.type === 'IMAGE' && message.media?.[0]) {
-                        <img width="220" class="cursor-pointer" [src]="getImageSource(message)" alt="Received media" (click)="openImagePreview(getImageMedia(message))">
-                      } @else if (isFileMessage(message)) {
-                        <button class="file-link" (click)="downloadFile(message)">
-                          <i class="fas fa-file-arrow-down"></i>
-                          <span>{{ getFileInfo(message).fileName }}</span>
-                          <small>{{ getFileSizeLabel(getFileInfo(message).fileSize) }}</small>
-                        </button>
-                      }
-                      <small class="meta">{{ message.createdAt | date:'HH:mm' }}</small>
-                    </div>
-                  </div>
-                }
+                <app-message-item [message]="message" [self]="isSelfMessage(message)"></app-message-item>
               }
             </div>
 
@@ -104,8 +60,8 @@
                 <input
                   #inputFile
                   type="file"
+                  accept="image/*"
                   [hidden]="true"
-
                   (change)="uploadMedia($event.target)"
                 >
 
@@ -138,16 +94,6 @@
               </div>
             </div>
           </div>
-
-            @if (selectedImage) {
-              <div class="image-preview-overlay" tabindex="0" >
-                <button class="close-preview-btn" (click)="closeImagePreview()">
-                  <i class="fas fa-times"></i>
-                </button>
-                <img class="preview-image" [src]="'data:image/jpg;base64,' + selectedImage" alt="Image preview">
-              </div>
-            }
-
         } @else {
           <div class="empty-state">
             <img width="240" src="logo.png" alt="PingMe logo">

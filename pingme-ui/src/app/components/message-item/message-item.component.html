@@ -1,0 +1,32 @@
+<div class="message-row" [class.self]="self" [class.friend]="!self">
+  <div class="message-card">
+    @if (message.type === 'TEXT') {
+      <span>{{ message.content }}</span>
+    } @else if (isImageMessage()) {
+      <img class="chat-image" [src]="getImageSource()" alt="Chat image" (click)="openImagePreview()">
+    } @else {
+      <span>{{ message.content }}</span>
+    }
+
+    <small class="meta">
+      {{ message.createdAt | date:'HH:mm' }}
+      @if (self && message.state === 'SENT') {
+        <i class="fas fa-check seen"></i>
+      } @else if (self) {
+        <span class="double-check">
+          <i class="fas fa-check seen"></i>
+          <i class="fas fa-check seen ml-neg"></i>
+        </span>
+      }
+    </small>
+  </div>
+</div>
+
+@if (selectedImage) {
+  <div class="image-preview-overlay" tabindex="0">
+    <button class="close-preview-btn" (click)="closeImagePreview()">
+      <i class="fas fa-times"></i>
+    </button>
+    <img class="preview-image" [src]="selectedImage" alt="Image preview">
+  </div>
+}
