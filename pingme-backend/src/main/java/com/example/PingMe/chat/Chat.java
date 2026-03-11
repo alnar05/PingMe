@@ -8,7 +8,9 @@ import com.example.PingMe.user.User;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static jakarta.persistence.GenerationType.UUID;
 
@@ -34,6 +36,11 @@ public class Chat extends BaseAuditingEntity {
     @OneToMany(mappedBy = "chat", fetch = FetchType.EAGER)
     @OrderBy("createdDate DESC")
     private List<Message> messages;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "chat_favourite", joinColumns = @JoinColumn(name = "chat_id"))
+    @Column(name = "user_id")
+    private Set<String> favouriteByUserIds = new HashSet<>();
 
     @Transient
     public String getChatName(String senderId) {
@@ -111,6 +118,19 @@ public class Chat extends BaseAuditingEntity {
 
     public void setMessages(List<Message> messages) {
         this.messages = messages;
+    }
+
+    public Set<String> getFavouriteByUserIds() {
+        return favouriteByUserIds;
+    }
+
+    public void setFavouriteByUserIds(Set<String> favouriteByUserIds) {
+        this.favouriteByUserIds = favouriteByUserIds;
+    }
+
+    @Transient
+    public boolean isFavouriteFor(String userId) {
+        return favouriteByUserIds != null && favouriteByUserIds.contains(userId);
     }
 
     // Constructors

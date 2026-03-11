@@ -1,0 +1,35 @@
+@if (selectedChat()) {
+  <div class="chat-layout">
+    <div class="chat-header">
+      <h5>{{ selectedChat()?.name }}</h5>
+    </div>
+
+    <div class="messages-area" (click)="markAsSeen.emit()">
+      @for (message of messages(); track message.id) {
+        <div class="message-row" [class.self]="isSelfMessage(message)" [class.friend]="!isSelfMessage(message)">
+          <app-message-item [message]="message" [isSelf]="isSelfMessage(message)" />
+        </div>
+      }
+    </div>
+
+    <div class="composer-wrap">
+      <div class="composer-row">
+        <i class="fas fa-paperclip cursor-pointer" (click)="inputFile.click()"></i>
+        <input #inputFile type="file" [hidden]="true" (change)="onFileSelected($event.target)">
+        <i class="fa-regular fa-face-smile cursor-pointer" (click)="showEmojis = !showEmojis"></i>
+
+        @if (showEmojis) {
+          <emoji-mart [set]="'google'" title="Pick your emoji.." emoji="smile" class="emojis-panel" (emojiClick)="onSelectEmojis($event)"></emoji-mart>
+        }
+
+        <input type="text" class="message-input" placeholder="Type a message" [(ngModel)]="messageContent" (keydown.enter)="onSend()" (click)="markAsSeen.emit()">
+        <button class="send-btn" (click)="onSend()" [disabled]="!messageContent.trim()"><i class="fa-solid fa-paper-plane"></i></button>
+      </div>
+    </div>
+  </div>
+} @else {
+  <div class="empty-state">
+    <img width="220" src="logo.png" alt="PingMe logo">
+    <h2>Welcome to PingMe</h2>
+  </div>
+}

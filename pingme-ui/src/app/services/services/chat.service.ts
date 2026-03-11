@@ -5,6 +5,7 @@
 import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 import { BaseService } from '../base-service';
@@ -72,6 +73,11 @@ export class ChatService extends BaseService {
     return this.createChat$Response(params, context).pipe(
       map((r: StrictHttpResponse<StringResponse>): StringResponse => r.body)
     );
+  }
+
+  setChatFavourite(chatId: string, value: boolean, context?: HttpContext): Observable<void> {
+    const params = new HttpParams().set('value', value);
+    return this.http.patch<void>(`${this.rootUrl}/api/v1/chats/${chatId}/favourite`, null, { params, context });
   }
 
 }

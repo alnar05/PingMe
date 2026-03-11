@@ -90,27 +90,49 @@ public class MessageService {
 
         final String senderId = getSenderId(chat, authentication);
         final String receiverId = getRecipientId(chat, authentication);
+        final MessageType messageType = resolveMediaType(file);
 
-        final String filePath = fileService.saveFile(file, senderId);
+        final FileService.SavedFile savedFile = fileService.saveFile(file, senderId);
         Message message = new Message();
         message.setReceiverId(receiverId);
         message.setSenderId(senderId);
         message.setState(MessageState.SENT);
-        message.setType(MessageType.IMAGE);
-        message.setMediaFilePath(filePath);
+        message.setType(messageType);
+        message.setMediaFilePath(savedFile.path());
+        message.setFileName(savedFile.fileName());
+        message.setMimeType(savedFile.mimeType());
+        message.setFileSize(savedFile.fileSize());
+        message.setContent(savedFile.fileName());
         message.setChat(chat);
         messageRepository.save(message);
 
         Notification notification = Notification.builder()
                 .chatId(chat.getId())
-                .type(NotificationType.IMAGE)
+                .type(NotificationType.MEDIA)
                 .senderId(senderId)
                 .receiverId(receiverId)
-                .messageType(MessageType.IMAGE)
-                .media(FileUtils.readFileFromLocation(filePath))
+                .messageType(messageType)
+                .content(savedFile.fileName())
+                .media(FileUtils.readFileFromLocation(savedFile.path()))
+                .fileName(savedFile.fileName())
+                .mimeType(savedFile.mimeType())
+                .fileSize(savedFile.fileSize())
                 .build();
 
         notificationService.sendNotification(receiverId, notification);
+    }
+
+    private MessageType resolveMediaType(MultipartFile file) {
+        String contentType = file.getContentType();
+        if (contentType != null) {
+            if (contentType.startsWith("image/")) {
+                return MessageType.IMAGE;
+            }
+            if (contentType.startsWith("video/")) {
+                return MessageType.VIDEO;
+            }
+        }
+        return MessageType.FILE;
     }
 
     private String getSenderId(Chat chat, Authentication authentication) {

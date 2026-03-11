@@ -1,0 +1,25 @@
+<div class="message-card">
+  @if (message().type === 'IMAGE' && message().media?.length) {
+    <img class="image-message" [src]="'data:' + (message().mimeType || 'image/png') + ';base64,' + message().media?.[0]" alt="Image" (click)="openImagePreview()">
+  } @else if (message().type === 'VIDEO' && message().media?.length) {
+    <video controls class="video-message" [src]="'data:' + (message().mimeType || 'video/mp4') + ';base64,' + message().media?.[0]"></video>
+  } @else if (message().type === 'FILE' && message().media?.length) {
+    <a class="file-message" [href]="'data:' + (message().mimeType || 'application/octet-stream') + ';base64,' + message().media?.[0]" [download]="message().fileName || 'file'">
+      <i class="fa-solid fa-file-arrow-down"></i> {{ message().fileName }} <span>{{ fileSizeLabel(message().fileSize) }}</span>
+    </a>
+  } @else {
+    <span>{{ message().content }}</span>
+  }
+  <span class="meta">{{ message().createdAt | date: 'dd.MM.yy HH:mm' }}</span>
+</div>
+
+@if (imagePreviewOpen && message().media?.length) {
+  <div class="image-modal">
+    <button class="close-btn" (click)="closeImagePreview()"><i class="fa-solid fa-xmark"></i></button>
+    <div class="zoom-controls">
+      <button (click)="onZoom(-0.2)">-</button>
+      <button (click)="onZoom(0.2)">+</button>
+    </div>
+    <img [style.transform]="'scale(' + zoom + ')'" [src]="'data:' + (message().mimeType || 'image/png') + ';base64,' + message().media?.[0]" alt="Preview">
+  </div>
+}

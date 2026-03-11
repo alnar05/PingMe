@@ -33,9 +33,10 @@ public class Message extends BaseAuditingEntity {
     @Column(name = "receiver_id", nullable = false)
     private String receiverId;
     private String mediaFilePath;
+    private String fileName;
+    private String mimeType;
+    private Long fileSize;
 
-
-    // Getters, setters
     public Long getId() {
         return id;
     }
@@ -100,22 +101,27 @@ public class Message extends BaseAuditingEntity {
         this.mediaFilePath = mediaFilePath;
     }
 
-
-    // Constructors
-    public Message() {
-        super();
+    public String getFileName() {
+        return fileName;
     }
 
-    public Message(Long id, String content, MessageState state, MessageType type,
-                   Chat chat, String senderId, String receiverId, String mediaFilePath) {
-        super();
-        this.id = id;
-        this.content = content;
-        this.state = state;
-        this.type = type;
-        this.chat = chat;
-        this.senderId = senderId;
-        this.receiverId = receiverId;
-        this.mediaFilePath = mediaFilePath;
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public String getMimeType() {
+        return mimeType;
+    }
+
+    public void setMimeType(String mimeType) {
+        this.mimeType = mimeType;
+    }
+
+    public Long getFileSize() {
+        return fileSize;
+    }
+
+    public void setFileSize(Long fileSize) {
+        this.fileSize = fileSize;
     }
 }

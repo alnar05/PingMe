@@ -1,0 +1,11 @@
+.message-card { max-width:min(72%,560px); border:1px solid var(--border-soft); border-radius:14px; padding:.65rem .8rem; background:#fff; display:flex; flex-direction:column; gap:.4rem; }
+.image-message { max-width: 280px; border-radius:10px; cursor: zoom-in; }
+.video-message { max-width: 320px; border-radius:10px; }
+.file-message { color: var(--accent); text-decoration:none; font-weight:600; display:flex; gap:.4rem; align-items:center; }
+.file-message span { color: var(--text-muted); font-weight:400; }
+.meta { color: var(--text-muted); font-size:.73rem; }
+.image-modal { position: fixed; inset: 0; background: rgba(15,23,42,.8); z-index:1000; display:grid; place-items:center; }
+.image-modal img { max-width: 80vw; max-height: 80vh; transition: transform .2s ease; }
+.close-btn { position:absolute; top:16px; right:16px; border:none; width:36px; height:36px; border-radius:50%; }
+.zoom-controls { position:absolute; bottom:16px; display:flex; gap:.5rem; }
+.zoom-controls button { width:34px; height:34px; border:none; border-radius:8px; }

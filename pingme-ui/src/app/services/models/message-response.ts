@@ -5,10 +5,13 @@
 export interface MessageResponse {
   content?: string;
   createdAt?: string;
+  fileName?: string;
+  fileSize?: number;
   id?: number;
   media?: Array<string>;
+  mimeType?: string;
   receiverId?: string;
   senderId?: string;
   state?: 'SENT' | 'SEEN';
-  type?: 'TEXT' | 'IMAGE' | 'VIDEO' | 'AUDIO';
+  type?: 'TEXT' | 'IMAGE' | 'VIDEO' | 'FILE';
 }

@@ -51,4 +51,17 @@ public class ChatService {
         Chat savedChat = chatRepository.save(chat);
         return savedChat.getId();
     }
+    @Transactional
+    public void setFavourite(String chatId, boolean favourite, Authentication currentUser) {
+        Chat chat = chatRepository.findById(chatId)
+                .orElseThrow(() -> new EntityNotFoundException("Chat not found"));
+        String userId = currentUser.getName();
+        if (favourite) {
+            chat.getFavouriteByUserIds().add(userId);
+        } else {
+            chat.getFavouriteByUserIds().remove(userId);
+        }
+        chatRepository.save(chat);
+    }
+
 }

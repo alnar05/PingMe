@@ -3,8 +3,11 @@ export interface Notification {
   content?: string;
   senderId?: string;
   receiverId?: string;
-  messageType?: 'TEXT' | 'IMAGE' | 'VIDEO' | 'AUDIO';
-  type?: 'SEEN' | 'MESSAGE' | 'IMAGE' | 'VIDEO' | 'AUDIO';
+  messageType?: 'TEXT' | 'IMAGE' | 'VIDEO' | 'FILE';
+  type?: 'SEEN' | 'MESSAGE' | 'MEDIA';
   chatName?: string;
   media?: Array<string>;
+  fileName?: string;
+  mimeType?: string;
+  fileSize?: number;
 }
