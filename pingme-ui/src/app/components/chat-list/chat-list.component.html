@@ -18,18 +18,17 @@
   <div class="search-wrap">
     <div class="search-box">
       <i class="fas fa-search"></i>
-      <input type="text" placeholder="Search chats" aria-label="Search">
+      <input type="text" placeholder="Search chats" aria-label="Search" [(ngModel)]="searchTerm">
     </div>
     <div class="filter-pills">
-      <span class="pill">All</span>
-      <span class="pill">Unread</span>
-      <span class="pill">Favorites</span>
+      <button class="pill" [class.active]="activeFilter === 'ALL'" (click)="setFilter('ALL')">All</button>
+      <button class="pill" [class.active]="activeFilter === 'UNREAD'" (click)="setFilter('UNREAD')">Unread</button>
     </div>
   </div>
 
   <div class="chat-list-body">
-    @if (chats().length && !searchNewContact) {
-      @for (chat of chats(); track chat) {
+    @if (filteredChats().length && !searchNewContact) {
+      @for (chat of filteredChats(); track chat) {
         <div class="chat-list-item" (click)="chatClicked(chat)">
           <div class="d-flex gap-2 align-items-center min-w-0">
             <div class="user-img">
@@ -72,7 +71,7 @@
         </div>
       }
     } @else {
-      <span class="empty-chats">No chats yet.</span>
+      <span class="empty-chats">No chats found.</span>
     }
   </div>
 </div>

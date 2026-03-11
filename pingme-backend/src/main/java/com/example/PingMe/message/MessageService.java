@@ -96,21 +96,29 @@ public class MessageService {
         message.setReceiverId(receiverId);
         message.setSenderId(senderId);
         message.setState(MessageState.SENT);
-        message.setType(MessageType.IMAGE);
+        final boolean imageFile = file.getContentType() != null && file.getContentType().startsWith("image/");
+
+        message.setType(imageFile ? MessageType.IMAGE : MessageType.FILE);
+        message.setContent(imageFile ? "Attachment" : buildFileContent(file));
         message.setMediaFilePath(filePath);
         message.setChat(chat);
         messageRepository.save(message);
 
         Notification notification = Notification.builder()
                 .chatId(chat.getId())
-                .type(NotificationType.IMAGE)
+                .type(imageFile ? NotificationType.IMAGE : NotificationType.FILE)
+                .content(message.getContent())
                 .senderId(senderId)
                 .receiverId(receiverId)
-                .messageType(MessageType.IMAGE)
+                .messageType(imageFile ? MessageType.IMAGE : MessageType.FILE)
                 .media(FileUtils.readFileFromLocation(filePath))
                 .build();
 
         notificationService.sendNotification(receiverId, notification);
+    }
+
+    private String buildFileContent(MultipartFile file) {
+        return "{\"fileName\":\"" + file.getOriginalFilename() + "\",\"fileSize\":" + file.getSize() + "}";
     }
 
     private String getSenderId(Chat chat, Authentication authentication) {

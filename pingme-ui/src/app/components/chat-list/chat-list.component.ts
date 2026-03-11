@@ -5,19 +5,22 @@ import {DatePipe} from '@angular/common';
 import {UserService} from '../../services/services/user.service';
 import {UserResponse} from '../../services/models/user-response';
 import {KeycloakService} from '../../utils/keycloak/keycloak.service';
-import {MessageService} from '../../services/services/message.service';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-chat-list',
   templateUrl: './chat-list.component.html',
   imports: [
-    DatePipe
+    DatePipe,
+    FormsModule
   ],
   styleUrl: './chat-list.component.scss'
 })
 export class ChatListComponent {
   chats: InputSignal<ChatResponse[]> = input<ChatResponse[]>([]);
   searchNewContact = false;
+  searchTerm = '';
+  activeFilter: 'ALL' | 'UNREAD' = 'ALL';
   contacts: Array<UserResponse> = [];
   chatSelected = output<ChatResponse>();
 
@@ -62,6 +65,24 @@ export class ChatListComponent {
 
   chatClicked(chat: ChatResponse) {
     this.chatSelected.emit(chat);
+  }
+
+  setFilter(filter: 'ALL' | 'UNREAD') {
+    this.activeFilter = filter;
+  }
+
+  filteredChats(): ChatResponse[] {
+    const normalizedSearch = this.searchTerm.trim().toLowerCase();
+    return this.chats().filter((chat) => {
+      const matchesSearch = !normalizedSearch
+        || chat.name?.toLowerCase().includes(normalizedSearch)
+        || chat.lastMessage?.toLowerCase().includes(normalizedSearch);
+
+      const matchesFilter = this.activeFilter === 'ALL'
+        || (chat.unreadCount ?? 0) > 0;
+
+      return matchesSearch && matchesFilter;
+    });
   }
 
   wrapMessage(lastMessage: string | undefined): string {
