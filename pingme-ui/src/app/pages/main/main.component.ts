@@ -39,7 +39,7 @@ export class MainComponent implements OnInit, OnDestroy, AfterViewChecked {
   constructor(
     private chatService: ChatService,
     private messageService: MessageService,
-    private keycloakService: KeycloakService,
+    public keycloakService: KeycloakService,
   ) {
   }
 
