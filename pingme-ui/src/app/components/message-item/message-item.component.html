@@ -1,0 +1,8 @@
+<article class="message-item" [class.message-item--mine]="mine()">
+  @if (message().type === 'IMAGE' && message().media) {
+    <img class="message-item__media" [src]="'data:image/jpg;base64,' + message().media" alt="media message" />
+  } @else {
+    <p>{{ message().content }}</p>
+  }
+  <small>{{ message().createdAt | date:'HH:mm' }}</small>
+</article>

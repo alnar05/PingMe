@@ -1,0 +1,30 @@
+.message-item {
+  max-width: 70%;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 0.6rem 0.75rem;
+  background: #fff;
+
+  p {
+    margin: 0;
+    white-space: pre-wrap;
+  }
+
+  small {
+    display: block;
+    margin-top: 0.35rem;
+    color: #6b7280;
+    text-align: right;
+  }
+}
+
+.message-item--mine {
+  margin-left: auto;
+  background: #f8fafc;
+}
+
+.message-item__media {
+  width: 220px;
+  max-width: 100%;
+  border-radius: 6px;
+}
